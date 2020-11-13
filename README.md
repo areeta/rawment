@@ -30,12 +30,12 @@ To build our project, we’ve opted to use a data set from Kaggle, which has com
 * [ ] Most common noodle favor
 * [ ] Top ramen of every year
 
-## Team Members
+## Team Members (UCInetID)
 
 @nguyev12
 * [ ] Convert the raw CSV data into usable JSON data to be processed with JavaScript.
 * [ ] Responsible for the Vega-lite and graphical portion of interpreting the data.
 
-@areeta
+@areetaw
 * [ ] Design and create mockups for the website using Figma.
 * [ ] Responsible for the HTML/CSS/Bootstrap portion of the project.

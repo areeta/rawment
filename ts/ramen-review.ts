@@ -45,7 +45,7 @@ class RamenReview {
      * @return {string}
      */
     public get style(): string {
-        return this._style;
+        return this._style == "" ? "Other" : this._style;
     }
 
     /**
@@ -61,7 +61,7 @@ class RamenReview {
      * @return {number}
      */
     public get stars(): number {
-        return this._stars;
+        return String(this._stars) == "Unrated" ? NaN : this._stars;
     }
 
     /**

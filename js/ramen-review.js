@@ -48,7 +48,7 @@ class RamenReview {
      * @return {number}
      */
     get stars() {
-        return this._stars == "Unrated" ? null : this._stars;
+        return String(this._stars) == "Unrated" ? NaN : this._stars;
     }
     /**
      * Setter reviewId

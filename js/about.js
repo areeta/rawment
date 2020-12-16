@@ -10,32 +10,31 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	});
 
 	// console.log(ramen_reviews_array)
-	//This line modifies the DOM, searching for the tag with the numberTweets ID and updating the text.
-	//It works correctly, your task is to update the text of the other tags in the HTML file!
+
 	$('#numberRamenReviews').text(ramen_reviews_array.length);
 
 	countryBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
-		if (countryBasedReviews.has(review.country)) {
-			countryBasedReviews.set(review.country, {
-				frequency: ++countryBasedReviews.get(review.country).frequency,
-				totalStars: countryBasedReviews.get(review.country).totalStars + review.stars,
-				avgStarsFromThisCountry: countryBasedReviews.get(review.country).totalStars / countryBasedReviews.get(review.country).frequency,
-			});
-		} else {
-			countryBasedReviews.set(review.country, {
-				frequency: 1,
-				totalStars: review.stars,
-				avgStarsFromThisCountry: review.stars / 1,
-			});
+		if (!isNaN(review.stars)) {
+			if (countryBasedReviews.has(review.country)) {
+				countryBasedReviews.set(review.country, {
+					frequency: ++countryBasedReviews.get(review.country).frequency,
+					totalStars: countryBasedReviews.get(review.country).totalStars + review.stars,
+					avgStarsFromThisCountry: countryBasedReviews.get(review.country).totalStars / countryBasedReviews.get(review.country).frequency,
+				});
+			} else {
+				countryBasedReviews.set(review.country, {
+					frequency: 1,
+					totalStars: review.stars,
+					avgStarsFromThisCountry: review.stars / 1,
+				});
+			}
 		}
 	})
 
-	console.log(countryBasedReviews);
 	let countryBasedReviewsArr = Array.from(countryBasedReviews).map(
 		([country, { frequency, totalStars, avgStarsFromThisCountry }]) =>
 			({ country, frequency, avgStarsFromThisCountry }));
-
 
 	reviewCountVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
@@ -61,8 +60,9 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	};
 
 	vegaEmbed('#reviewCountVis', reviewCountVisSpec, { actions: false });
+
 	//Countries that have the highest rated ramen
-	avgStarsVisSpec = {
+	countryAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
 		"data": {
@@ -80,15 +80,108 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			"y": {
 				"field": "avgStarsFromThisCountry",
 				"type": "quantitative",
-				"title": "# of Mentions",
+				"title": "Average Ramen Rating",
 			},
 		},
 	};
 
-	vegaEmbed('#countryAvgStarsVis', avgStarsVisSpec, { actions: false });
+	vegaEmbed('#countryAvgStarsVis', countryAvgStarsVisSpec, { actions: false });
 
 	//Style of ramen with the highest rating
+	styleBasedReviews = new Map();
+	ramen_reviews_array.map(review => {
+		if (review.stars != NaN) {
+			if (styleBasedReviews.has(review.style)) {
+				styleBasedReviews.set(review.style, {
+					frequency: ++styleBasedReviews.get(review.style).frequency,
+					totalStars: styleBasedReviews.get(review.style).totalStars + review.stars,
+					avgStarsFromThisStyle: styleBasedReviews.get(review.style).totalStars / styleBasedReviews.get(review.style).frequency,
+				});
+			} else {
+				styleBasedReviews.set(review.style, {
+					frequency: 1,
+					totalStars: review.stars,
+					avgStarsFromThisStyle: review.stars / 1,
+				})
+			}
+		}
+	});
+	let avgStarsFromThisStyleArr = Array.from(styleBasedReviews).map(
+		([style, { frequency, totalStars, avgStarsFromThisStyle }]) =>
+			({ style, frequency, avgStarsFromThisStyle }));
+
+	styleAvgStarsVisSpec = {
+		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
+		"description": "",
+		"data": {
+			"values": avgStarsFromThisStyleArr
+		},
+		"mark": "bar",
+		"encoding": {
+			"x": {
+				"field": "style",
+				"axis": { "labelAngle": 45 },
+				"type": "nominal",
+				"title": "Style of Ramen",
+				"sort": "-y"
+			},
+			"y": {
+				"field": "avgStarsFromThisStyle",
+				"type": "quantitative",
+				"title": "Average Ramen Rating",
+			},
+		},
+	};
+	console.log(avgStarsFromThisStyleArr)
+	vegaEmbed('#styleAvgStarsVis', styleAvgStarsVisSpec, { actions: false });
 	//Brand of ramen that has the highest rating
+
+	brandBasedReviews = new Map();
+	ramen_reviews_array.map(review => {
+		if (review.stars != NaN) {
+			if (brandBasedReviews.has(review.brand)) {
+				brandBasedReviews.set(review.brand, {
+					frequency: ++brandBasedReviews.get(review.brand).frequency,
+					totalStars: brandBasedReviews.get(review.brand).totalStars + review.stars,
+					avgStarsFromThisBrand: brandBasedReviews.get(review.brand).totalStars / brandBasedReviews.get(review.brand).frequency,
+				})
+			} else {
+				brandBasedReviews.set(review.brand, {
+					frequency: 1,
+					totalStars: review.stars,
+					avgStarsFromThisBrand: review.stars / 1,
+				})
+			}
+		}
+	});
+	let avgStarsFromThisBrandArr = Array.from(brandBasedReviews).map(
+		([brand, { frequency, totalStars, avgStarsFromThisBrand }]) =>
+			({ brand, frequency, avgStarsFromThisBrand }));
+
+	brandAvgStarsVisSpec = {
+		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
+		"description": "",
+		"data": {
+			"values": avgStarsFromThisBrandArr
+		},
+		"mark": "bar",
+		"encoding": {
+			"x": {
+				"field": "brand",
+				"axis": { "labelAngle": 45 },
+				"type": "nominal",
+				"title": "Style of Ramen",
+				"sort": "-y"
+			},
+			"y": {
+				"field": "avgStarsFromThisBrand",
+				"type": "quantitative",
+				"title": "Average Ramen Rating",
+			},
+		},
+	};
+	console.log(avgStarsFromThisBrandArr)
+	vegaEmbed('#brandAvgStarsVis', brandAvgStarsVisSpec, { actions: false });
 	//Most common noodle flavor
 	//Top ramen of each year
 

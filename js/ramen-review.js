@@ -48,7 +48,7 @@ class RamenReview {
      * @return {number}
      */
     get stars() {
-        return this._stars;
+        return this._stars == "Unrated" ? null : this._stars;
     }
     /**
      * Setter reviewId

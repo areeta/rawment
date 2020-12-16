@@ -17,18 +17,29 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	countriesReviewsCount = new Map();
 	ramen_reviews_array.map(review => {
 		if (countriesReviewsCount.has(review.country)) {
-			countriesReviewsCount.set(review.country, { frequency: ++countriesReviewsCount.get(review.country).frequency });
+			countriesReviewsCount.set(review.country, {
+				frequency: ++countriesReviewsCount.get(review.country).frequency,
+				totalStars: countriesReviewsCount.get(review.country).totalStars + review.stars,
+				avgStarsFromThisCountry: countriesReviewsCount.get(review.country).totalStars / countriesReviewsCount.get(review.country).frequency,
+			});
 		} else {
-			countriesReviewsCount.set(review.country, { frequency: 1 });
+			countriesReviewsCount.set(review.country, {
+				frequency: 1,
+				totalStars: review.stars,
+				avgStarsFromThisCountry: review.stars / 1,
+			});
 		}
 	})
-	console.log(countriesReviewsCount)
-	let countriesReviewsCountArr = Array.from(countriesReviewsCount).map(([country, { frequency }]) =>
-		({ country, frequency }));
 
-	activity_vis_spec = {
+	console.log(countriesReviewsCount);
+	let countriesReviewsCountArr = Array.from(countriesReviewsCount).map(
+		([country, { frequency, totalStars, avgStarsFromThisCountry }]) =>
+			({ country, frequency, avgStarsFromThisCountry }));
+
+
+	reviewCountVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
-		"description": "A plot of how many of each type of activity exists in the dataset.",
+		"description": "",
 		"data": {
 			"values": countriesReviewsCountArr
 		},
@@ -45,14 +56,37 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 				"field": "frequency",
 				"type": "quantitative",
 				"title": "# of Mentions",
-
 			},
 		},
-
-
 	};
-	vegaEmbed('#activityVis', activity_vis_spec, { actions: false });
+
+	vegaEmbed('#reviewCountVis', reviewCountVisSpec, { actions: false });
 	//Countries that have the highest rated ramen
+	avgStarsVisSpec = {
+		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
+		"description": "",
+		"data": {
+			"values": countriesReviewsCountArr
+		},
+		"mark": "bar",
+		"encoding": {
+			"x": {
+				"field": "country",
+				"axis": { "labelAngle": 45 },
+				"type": "nominal",
+				"title": "Country",
+				"sort": "-y"
+			},
+			"y": {
+				"field": "avgStarsFromThisCountry",
+				"type": "quantitative",
+				"title": "# of Mentions",
+			},
+		},
+	};
+
+	vegaEmbed('#countryAvgStarsVis', avgStarsVisSpec, { actions: false });
+
 	//Style of ramen with the highest rating
 	//Brand of ramen that has the highest rating
 	//Most common noodle flavor

@@ -1,18 +1,19 @@
 function parseRamenReviews(RAMEN_REVIEWS) {
-	//Do not proceed if no tweets loaded
+	//Do not proceed if no ramen reviews are loaded
 	if (RAMEN_REVIEWS === undefined) {
 		window.alert('No ramen reviews returned');
 		return;
 	}
 
+	// Build RamenReview objects from the JSON data and load it into ramen_reviews_array. Reverses RAMEN_REVIEWS to achieve ascending order.
 	ramen_reviews_array = RAMEN_REVIEWS.slice().reverse().map(function (ramen_review) {
 		return new RamenReview(ramen_review.REVIEW_ID, ramen_review.BRAND, ramen_review.VARIETY, ramen_review.STYLE, ramen_review.COUNTRY, ramen_review.STARS);
 	});
 
-	// console.log(ramen_reviews_array)
-
 	$('#numberRamenReviews').text(ramen_reviews_array.length);
 
+	// Build map to track country, frequency, total stars, and average rating
+	console.group("Country-based graphical data.");
 	countryBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
 		if (!isNaN(review.stars)) {
@@ -32,10 +33,13 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		}
 	})
 
+	console.info(countryBasedReviews);
+
 	let countryBasedReviewsArr = Array.from(countryBasedReviews).map(
 		([country, { frequency, totalStars, avgStarsFromThisCountry }]) =>
 			({ country, frequency, avgStarsFromThisCountry }));
 
+	// Vis Spec: Countries that have the most ramen reviews
 	reviewCountVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -58,10 +62,9 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-
 	vegaEmbed('#reviewCountVis', reviewCountVisSpec, { actions: false });
 
-	//Countries that have the highest rated ramen
+	// Vis Spec: Countries that have the highest rated ramen
 	countryAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -84,13 +87,14 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-
 	vegaEmbed('#countryAvgStarsVis', countryAvgStarsVisSpec, { actions: false });
+	console.groupEnd();
 
-	//Style of ramen with the highest rating
+	// Build map to track style, frequency, total stars, and average rating
+	console.group("Style-based graphical data.")
 	styleBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
-		if (review.stars != NaN) {
+		if (!isNaN(review.stars)) {
 			if (styleBasedReviews.has(review.style)) {
 				styleBasedReviews.set(review.style, {
 					frequency: ++styleBasedReviews.get(review.style).frequency,
@@ -106,10 +110,14 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			}
 		}
 	});
+
+	console.info(styleBasedReviews);
+
 	let avgStarsFromThisStyleArr = Array.from(styleBasedReviews).map(
 		([style, { frequency, totalStars, avgStarsFromThisStyle }]) =>
 			({ style, frequency, avgStarsFromThisStyle }));
 
+	// Vis Spec: Styles that have the highest average rating
 	styleAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -134,6 +142,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	};
 	vegaEmbed('#styleAvgStarsVis', styleAvgStarsVisSpec, { actions: false });
 
+	// Vis Spec: Styles that have the most ramen reviews
 	numStylesVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -156,14 +165,16 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-
 	vegaEmbed('#numStylesVis', numStylesVisSpec, { actions: false });
 	$("#numStylesVis").hide();
 
-	//Brand of ramen that has the highest rating
+	console.groupEnd();
+
+	// Build map to track brand, frequency, total stars, and average rating
+	console.group("Brand-based graphical data.")
 	brandBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
-		if (review.stars != NaN) {
+		if (!isNaN(review.stars)) {
 			if (brandBasedReviews.has(review.brand)) {
 				brandBasedReviews.set(review.brand, {
 					frequency: ++brandBasedReviews.get(review.brand).frequency,
@@ -180,10 +191,13 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		}
 	});
 
+	console.info(brandBasedReviews);
+
 	let avgStarsFromThisBrandArr = Array.from(brandBasedReviews).map(
 		([brand, { frequency, totalStars, avgStarsFromThisBrand }]) =>
 			({ brand, frequency, avgStarsFromThisBrand }));
 
+	// Vis Spec: Brands that have the highest average rating
 	brandAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -206,9 +220,9 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-
 	vegaEmbed('#brandAvgStarsVis', brandAvgStarsVisSpec, { actions: false });
 
+	// Vis Spec: Brands that have the most ramen reviews
 	numBrandsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
@@ -231,14 +245,9 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-
 	vegaEmbed('#numBrandsVis', numBrandsVisSpec, { actions: false });
 	$("#numBrandsVis").hide();
-
-	//Most common noodle flavor
-
-	//Top ramen of each year
-
+	console.groupEnd();
 }
 
 function showStyleGraph() {

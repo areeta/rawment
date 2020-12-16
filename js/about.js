@@ -9,31 +9,44 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		return new RamenReview(ramen_review.REVIEW_ID, ramen_review.BRAND, ramen_review.VARIETY, ramen_review.STYLE, ramen_review.COUNTRY, ramen_review.STARS);
 	});
 
-	console.log(ramen_reviews_array)
+	// console.log(ramen_reviews_array)
 	//This line modifies the DOM, searching for the tag with the numberTweets ID and updating the text.
 	//It works correctly, your task is to update the text of the other tags in the HTML file!
 	$('#numberRamenReviews').text(ramen_reviews_array.length);
+
+	countriesReviewsCount = new Map();
+	ramen_reviews_array.map(review => {
+		if (countriesReviewsCount.has(review.country)) {
+			countriesReviewsCount.set(review.country, { frequency: ++countriesReviewsCount.get(review.country).frequency });
+		} else {
+			countriesReviewsCount.set(review.country, { frequency: 1 });
+		}
+	})
+	console.log(countriesReviewsCount)
+	let countriesReviewsCountArr = Array.from(countriesReviewsCount).map(([country, { frequency }]) =>
+		({ country, frequency }));
 
 	activity_vis_spec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "A plot of how many of each type of activity exists in the dataset.",
 		"data": {
-			"url": "./data/ramen-data-convert.json"
+			"values": countriesReviewsCountArr
 		},
 		"mark": "bar",
 		"encoding": {
-			"y": {
-				"type": "quantitative",
-				"sort": { "op": "count", "field": "COUNTRY" },
-				"title": "Frequency of Activity"
-			},
 			"x": {
-				"field": "COUNTRY",
+				"field": "country",
 				"axis": { "labelAngle": 45 },
 				"type": "nominal",
-				"title": "Activity Type"
+				"title": "Country",
+				"sort": "-y"
 			},
+			"y": {
+				"field": "frequency",
+				"type": "quantitative",
+				"title": "# of Mentions",
 
+			},
 		},
 
 

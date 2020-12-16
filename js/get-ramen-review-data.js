@@ -4590,7 +4590,7 @@ function loadRamenReviewData() {
 			  "BRAND": "Nongshim",
 			  "VARIETY": "Rice Fettucini Alfredo",
 			  "STYLE": "Pack",
-			  "COUNTRY": "United States",
+			  "COUNTRY": "USA",
 			  "STARS": 3.75
 			},
 			{

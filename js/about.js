@@ -14,16 +14,16 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	//It works correctly, your task is to update the text of the other tags in the HTML file!
 	$('#numberRamenReviews').text(ramen_reviews_array.length);
 
-	countriesReviewsCount = new Map();
+	countryBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
-		if (countriesReviewsCount.has(review.country)) {
-			countriesReviewsCount.set(review.country, {
-				frequency: ++countriesReviewsCount.get(review.country).frequency,
-				totalStars: countriesReviewsCount.get(review.country).totalStars + review.stars,
-				avgStarsFromThisCountry: countriesReviewsCount.get(review.country).totalStars / countriesReviewsCount.get(review.country).frequency,
+		if (countryBasedReviews.has(review.country)) {
+			countryBasedReviews.set(review.country, {
+				frequency: ++countryBasedReviews.get(review.country).frequency,
+				totalStars: countryBasedReviews.get(review.country).totalStars + review.stars,
+				avgStarsFromThisCountry: countryBasedReviews.get(review.country).totalStars / countryBasedReviews.get(review.country).frequency,
 			});
 		} else {
-			countriesReviewsCount.set(review.country, {
+			countryBasedReviews.set(review.country, {
 				frequency: 1,
 				totalStars: review.stars,
 				avgStarsFromThisCountry: review.stars / 1,
@@ -31,8 +31,8 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		}
 	})
 
-	console.log(countriesReviewsCount);
-	let countriesReviewsCountArr = Array.from(countriesReviewsCount).map(
+	console.log(countryBasedReviews);
+	let countryBasedReviewsArr = Array.from(countryBasedReviews).map(
 		([country, { frequency, totalStars, avgStarsFromThisCountry }]) =>
 			({ country, frequency, avgStarsFromThisCountry }));
 
@@ -41,7 +41,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
 		"data": {
-			"values": countriesReviewsCountArr
+			"values": countryBasedReviewsArr
 		},
 		"mark": "bar",
 		"encoding": {
@@ -66,7 +66,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
 		"data": {
-			"values": countriesReviewsCountArr
+			"values": countryBasedReviewsArr
 		},
 		"mark": "bar",
 		"encoding": {

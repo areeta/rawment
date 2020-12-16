@@ -132,10 +132,35 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-	console.log(avgStarsFromThisStyleArr)
 	vegaEmbed('#styleAvgStarsVis', styleAvgStarsVisSpec, { actions: false });
-	//Brand of ramen that has the highest rating
 
+	numStylesVisSpec = {
+		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
+		"description": "",
+		"data": {
+			"values": avgStarsFromThisStyleArr
+		},
+		"mark": "bar",
+		"encoding": {
+			"x": {
+				"field": "style",
+				"axis": { "labelAngle": 45 },
+				"type": "nominal",
+				"title": "Style of Ramen",
+				"sort": "-y"
+			},
+			"y": {
+				"field": "frequency",
+				"type": "quantitative",
+				"title": "# of Reviews",
+			},
+		},
+	};
+
+	vegaEmbed('#numStylesVis', numStylesVisSpec, { actions: false });
+	$("#numStylesVis").hide();
+
+	//Brand of ramen that has the highest rating
 	brandBasedReviews = new Map();
 	ramen_reviews_array.map(review => {
 		if (review.stars != NaN) {
@@ -154,6 +179,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			}
 		}
 	});
+
 	let avgStarsFromThisBrandArr = Array.from(brandBasedReviews).map(
 		([brand, { frequency, totalStars, avgStarsFromThisBrand }]) =>
 			({ brand, frequency, avgStarsFromThisBrand }));
@@ -170,7 +196,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 				"field": "brand",
 				"axis": { "labelAngle": 45 },
 				"type": "nominal",
-				"title": "Style of Ramen",
+				"title": "Brand of Ramen",
 				"sort": "-y"
 			},
 			"y": {
@@ -180,13 +206,54 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			},
 		},
 	};
-	console.log(avgStarsFromThisBrandArr)
+
 	vegaEmbed('#brandAvgStarsVis', brandAvgStarsVisSpec, { actions: false });
+
+	numBrandsVisSpec = {
+		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
+		"description": "",
+		"data": {
+			"values": avgStarsFromThisBrandArr
+		},
+		"mark": "bar",
+		"encoding": {
+			"x": {
+				"field": "brand",
+				"axis": { "labelAngle": 45 },
+				"type": "nominal",
+				"title": "Brand of Ramen",
+				"sort": "-y"
+			},
+			"y": {
+				"field": "frequency",
+				"type": "quantitative",
+				"title": "Average Ramen Rating",
+			},
+		},
+	};
+
+	vegaEmbed('#numBrandsVis', numBrandsVisSpec, { actions: false });
+	$("#numBrandsVis").hide();
+
 	//Most common noodle flavor
+
 	//Top ramen of each year
 
 }
 
+function showStyleGraph() {
+	var x = document.getElementById("styleSwitch");
+	x.innerHTML === "Show frequency" ? x.innerHTML = "Show average ramen rating" : x.innerHTML = "Show frequency";
+	$("#styleAvgStarsVis").toggle();
+	$("#numStylesVis").toggle();
+}
+
+function showBrandGraph() {
+	var x = document.getElementById("brandSwitch");
+	x.innerHTML === "Show frequency" ? x.innerHTML = "Show average ramen rating" : x.innerHTML = "Show frequency";
+	$("#brandAvgStarsVis").toggle();
+	$("#numBrandsVis").toggle();
+}
 
 //Wait for the DOM to load
 $(document).ready(function () {

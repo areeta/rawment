@@ -34,7 +34,7 @@ class RamenReview {
      * @return {string}
      */
     get style() {
-        return this._style;
+        return this._style == "" ? "Other" : this._style;
     }
     /**
      * Getter country

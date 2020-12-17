@@ -125,7 +125,7 @@
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 870px) {
   #description {
     flex-direction: column;
   }
@@ -140,9 +140,9 @@
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1150px) {
   #description {
-    margin: 5rem;
+    margin: 4rem;
   }
 
   #eating-ramen {

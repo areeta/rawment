@@ -15,6 +15,8 @@ To build our project, we’ve opted to use a data set from Kaggle, which has com
     - Figma Prototype with Style Guide: https://www.figma.com/proto/XKVAFUWeG7JXBygHBhpzuT/RAWMENT?node-id=1%3A2&scaling=min-zoom
 * Use illustrations from websites like [Undraw.co](https://undraw.co/) and [Icons8](https://icons8.com/) to instill a sleek UI
 
+Although we used Figma to create mockups, they served more as inspiration and our final product has some changes!
+
 ### Pages
 
 #### About Page
@@ -24,24 +26,28 @@ To build our project, we’ve opted to use a data set from Kaggle, which has com
 * [ ] Describe the context of the project 
 * [ ] An overview of how we plan on giving meaning to the data.
 
-#### Graph Page
-* [ ] Determine which countries have the most ramen
-* [ ] Determine which countries have the highest rated ramen
-* [ ] Which style has the highest rating?
-* [ ] What brand has the highest rating?
-* [ ] Most common noodle favor
-* [ ] Top ramen of every year
+#### Data Page
+* [X] Determine which countries have the most ramen
+* [X] Determine which countries have the highest rated ramen
+* [X] Which style has the highest rating?
+* [X] What style has the most mentions?
+* [X] What brand has the highest rating?
+* [X] What brand has the most mentions?
+* [X] What style has the most mentions?
+
+Although our original project description had most common noodle flavor and top ramen of every year, we decided to remove those in exchange for frequency based graphs on brand information with rating and amount due to the fact that the data set had thousands of variations for flavors and there was no year information.
+
+For the data page, we wanted to show majority of the graph data and make it easy for the viewer to read the data so we did not make the graph responsive when looking at smaller screens.
 
 ## Team Members (UCInetID)
 
 @nguyev12
-* [ ] Convert the raw CSV data into usable JSON data to be processed with JavaScript.
-* [ ] Responsible for the Vega-lite and graphical portion of interpreting the data.
+* [X] Convert the raw CSV data into usable JSON data to be processed with JavaScript.
+* [X] Responsible for the Vega-lite and graphical portion of interpreting the data.
 
 @areetaw
 * [X] Design and create mockups for the website using Figma.
-* [ ] Responsible for the HTML/CSS/Bootstrap portion of the project.
-
+* [X] Responsible for the HTML/CSS/Bootstrap portion of the project.
 
 ## Project Grade + Resources
 
@@ -49,15 +55,15 @@ To build our project, we’ve opted to use a data set from Kaggle, which has com
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
-*/30
-- */20 Requirements
-- */5 Validity
-- */5 Documentation
-- */2 Bonus
+30/30
+- 20/20 Requirements
+- 5/5 Validity
+- 5/5 Documentation
+- 2/2 Bonus
 
 2. How long, in hours, did it take you to complete this assignment?
 
-
+30 hours.
 
 3. What online resources did you consult when completing this assignment? (list sites like StackOverflow or specific URLs for tutorials, etc.)
 

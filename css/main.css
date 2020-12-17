@@ -1,8 +1,9 @@
 :root {
   --red: #D23F35;
   --coral: #D68F7E;
-  --light-gray: #E2DBD5;
+  --light-tan: #E2DBD5;
   --tan: #EBBE80;
+  --light-gray: #C4C4C4;
   --dark-gray: #626464;
   --black: #000000;
   --white: #FFFFFF;
@@ -10,7 +11,7 @@
 
 html,
 body {
-  background-color: var(--light-gray);
+  background-color: var(--light-tan);
   color: var(--black);
   font-family: 'Reem Kufi', sans-serif;
   font-size: 1rem;

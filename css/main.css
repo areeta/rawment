@@ -1,0 +1,28 @@
+:root {
+  --red: #D23F35;
+  --coral: #D68F7E;
+  --light-gray: #E2DBD5;
+  --tan: #EBBE80;
+  --dark-gray: #626464;
+  --black: #000000;
+  --white: #FFFFFF;
+}
+
+html,
+body {
+  background-color: var(--light-gray);
+  color: var(--black);
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  padding: 1rem 4rem 1rem 4rem;
+}
+
+.nav-item {
+  padding-left: 2rem;
+  font-size: 26px;
+}

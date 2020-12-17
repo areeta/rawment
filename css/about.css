@@ -1,14 +1,10 @@
 #description {
-  margin: 5rem;
+  margin: 10rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-}
-
-@media only screen and (max-width: 900px) {
-  #description {
-    margin: 10rem;
-  }
+  flex-direction: row;
+  height: 100%;
 }
 
 h1 {
@@ -43,9 +39,8 @@ h3 {
   padding-bottom: 1rem;
 }
 
-.instant-ramen, .fancy-ramen {
-  height: 300px;
-  padding-right: 1rem;;
+#instant-ramen, #fancy-ramen {
+  height: 400px;
 }
 
 #accessbility {
@@ -65,4 +60,104 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.col {
+  margin: 16px;
+}
+
+.card-title {
+  color: var(--red);
+  text-align: center;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo {
+  height: 100px;
+}
+
+#technology {
+  padding: 5rem;
+}
+
+.technology-card {
+  background-color: var(--white);
+  padding: 2rem 0rem 2rem 0rem;
+  margin: 2rem;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+@media only screen and (max-width: 400px) {
+  #description {
+    margin: 1rem;
+  }
+
+  #eating-ramen {
+    height: 100px;
+  }
+
+  .logos {
+    flex-direction: column;
+    padding: 0rem;
+  }
+
+  .col {
+    margin: 0px!important;
+  }
+
+  .section-title {
+    font-size: 40px!important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #description {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  #eating-ramen, #instant-ramen, #fancy-ramen {
+    height: 200px!important;
+    margin-bottom: 16px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  #description {
+    margin: 2rem;
+  }
+
+  #inspiration, #accessbility, #technology, #team, #technology {
+    padding: 2rem!important;
+  }
+
+  #eating-ramen, #instant-ramen, #fancy-ramen {
+    height: 400px;
+  }
+
+  h1 {
+    font-size: 70px;
+  }
+
+  .technology-card{
+    width: 100%;
+  }
 }

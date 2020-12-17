@@ -71,7 +71,7 @@ To build our project, we’ve opted to use a data set from Kaggle, which has com
 * HTML Rectangles: https://stackoverflow.com/questions/20690408/how-to-draw-a-rectangle-in-html-or-css
 * Image on image: https://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html
 * Positioning: https://www.w3schools.com/css/css_positioning.asp
-
+* Bootstrap Cards: https://getbootstrap.com/docs/4.0/components/card/
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
 

@@ -27,3 +27,9 @@ body {
   padding-left: 2rem;
   font-size: 26px;
 }
+
+@media only screen and (max-width: 350px) {
+  .navbar {
+    padding: 1rem;
+  }
+}

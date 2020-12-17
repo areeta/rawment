@@ -38,6 +38,13 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	let countryBasedReviewsArr = Array.from(countryBasedReviews).map(
 		([country, { frequency, totalStars, avgStarsFromThisCountry }]) =>
 			({ country, frequency, avgStarsFromThisCountry }));
+	
+	// Find amount of countries.
+	let countries = new Set()
+	countryBasedReviewsArr.forEach(element => {
+		countries.add(element);
+	});
+	$('#numberCountries').text(countries.size);
 
 	// Vis Spec: Countries that have the most ramen reviews
 	reviewCountVisSpec = {
@@ -117,10 +124,18 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		([style, { frequency, totalStars, avgStarsFromThisStyle }]) =>
 			({ style, frequency, avgStarsFromThisStyle }));
 
+	// Find amount of styles
+	let styles = new Set()
+	avgStarsFromThisStyleArr.forEach(element => {
+		styles.add(element.style);
+	});
+	$('#numberStyles').text(styles.size);
+
 	// Vis Spec: Styles that have the highest average rating
 	styleAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
+		"width": 500,
 		"data": {
 			"values": avgStarsFromThisStyleArr
 		},
@@ -146,6 +161,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	numStylesVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
+		"width": 500,
 		"data": {
 			"values": avgStarsFromThisStyleArr
 		},
@@ -197,12 +213,25 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 		([brand, { frequency, totalStars, avgStarsFromThisBrand }]) =>
 			({ brand, frequency, avgStarsFromThisBrand }));
 
+	// Find amount of brands
+	let brands = new Set()
+	avgStarsFromThisBrandArr.forEach(element => {
+		brands.add(element.brand);
+	});
+	$('#numberBrands').text(brands.size);
+
+	// Find top 50 highest rating ramen
+	let highestRated = avgStarsFromThisBrandArr.sort(function(first, second) {
+		return second.avgStarsFromThisBrand - first.avgStarsFromThisBrand;
+	});
+	highestRated = highestRated.slice(0, 50);
+
 	// Vis Spec: Brands that have the highest average rating
 	brandAvgStarsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
 		"data": {
-			"values": avgStarsFromThisBrandArr
+			"values": highestRated
 		},
 		"mark": "bar",
 		"encoding": {
@@ -222,12 +251,18 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 	};
 	vegaEmbed('#brandAvgStarsVis', brandAvgStarsVisSpec, { actions: false });
 
+	// Find top 50 most ramen reviews
+	let mostReviews = avgStarsFromThisBrandArr.sort(function(first, second) {
+		return second.frequency - first.frequency;
+	});
+	mostReviews = mostReviews.slice(0, 50);
+
 	// Vis Spec: Brands that have the most ramen reviews
 	numBrandsVisSpec = {
 		"$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.8.json",
 		"description": "",
 		"data": {
-			"values": avgStarsFromThisBrandArr
+			"values": mostReviews
 		},
 		"mark": "bar",
 		"encoding": {
@@ -241,7 +276,7 @@ function parseRamenReviews(RAMEN_REVIEWS) {
 			"y": {
 				"field": "frequency",
 				"type": "quantitative",
-				"title": "Average Ramen Rating",
+				"title": "# of Ramen Reviews",
 			},
 		},
 	};

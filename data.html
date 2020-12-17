@@ -4,8 +4,11 @@
     <!-- meta tags -->
     <meta charset="utf-8">
     <meta name="author" content="Vivian Nguyen & Areeta Wong">
-    <meta name="description" content="Ramen Reviews">
+    <meta name="description" content="A responsive web application that analyzes and displays instant 
+      ramen statistics to help college students find the best ramen for them.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="RAWMENT, ramen, ramen review, ramen information, 
+    inf 133, inf 133 final project, inf 133 project">
     
     <!--Online scripts-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -59,18 +62,59 @@
       </div>
     </nav>
 
-    <!-- data -->
-    <p>There were <span id="numberRamenReviews">???</span> ramen reviews. </p>
-    <div id="reviewCountVis"></div>
-    <div id="countryAvgStarsVis"></div>
+    <!-- description section -->
+    <section id="description">
+      <div class="col">
+        <h1>Data</h1>
+        <h4>
+          From 2500 independent reviews of different instant ramen brands and types from the website, 
+          “The Ramen Rater”, we’ll aggregate and visualize helpful ramen information to help you find
+          your next meal.
+        </h4>
+      </div>
+      <img src="assets/world-view.svg" alt="One person looking at the globe" id="world-view">
+    </section>
 
-    <button id="styleSwitch" class="btn btn-primary" onClick="showStyleGraph()">Show frequency</button>
-    <div id="styleAvgStarsVis"></div>
-    <div id="numStylesVis"></div>
+    <!-- stats section -->
+    <section id="stats">
+      <div class="section-title">General Statistics</div>
+      <p>After looking at all of the data, there were:</p>
+      <ul>
+        <li><span id="numberRamenReviews">???</span> ramen reviews</li>
+        <li><span id="numberCountries">???</span> countries with ramen reviews</li>
+        <li><span id="numberStyles">???</span> types of style of ramen</li>
+        <li><span id="numberBrands">???</span> brands of ramen</li>
+      </ul>
+    </section>
 
-    <button id="brandSwitch" class="btn btn-primary" onClick="showBrandGraph()">Show frequency</button>
-    <div id="brandAvgStarsVis"></div>
-    <div id="numBrandsVis"></div>
+     <!-- country section -->
+    <section id="country">
+      <div class="section-title">Ramen Information by Country</div>
+      <p>The top three countries with most mentions in the data are Japan, USA, and South Korea.</p>
+      <div id="reviewCountVis"></div>
+      <p>The top three countries with highest average ratings in the data are Malaysia, Singapore, and Indonesia.</p>
+      <div id="countryAvgStarsVis"></div>
+    </section>
 
+    <!-- style section -->
+    <section id="style">
+      <div class="section-title">Ramen Information by Style</div>
+      <p>While pack style ramen has the most reviews, bar style ramen has the highest average ratings.</p>
+      <button id="styleSwitch" class="btn btn-primary" onClick="showStyleGraph()">Show frequency</button>
+      <div id="styleAvgStarsVis"></div>
+      <div id="numStylesVis"></div>
+    </section>
+
+    <!-- brand section -->
+    <section id="brands">
+      <div class="section-title">Ramen Information by Brand</div>
+      <p>While Higashi has the highest average rating for ramen, Nissin has the most ramen reviews.</p>
+      <p>Disclaimer: For both graphs, we opted to show only the top 50 of each type of graph because
+        the actual graph was far too big to display.
+      </p>
+      <button id="brandSwitch" class="btn btn-primary" onClick="showBrandGraph()">Show frequency</button>
+      <div id="brandAvgStarsVis"></div>
+      <div id="numBrandsVis"></div>
+    </section>
   </body>
 </html>

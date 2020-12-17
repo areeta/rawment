@@ -1,0 +1,94 @@
+#description {
+  margin: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  height: 100%;
+}
+  
+h1 {
+  font-size: 64px;
+  height: 102px;
+  line-height: 96px;
+  text-align: left;
+}
+
+h4 {
+  text-align: left;
+  font-size: 24px;
+  line-height: 44px;
+}
+
+p, dl, ol, ul {
+  font-size: 24px;
+}
+
+.section-title {
+  font-size: 64px;
+  line-height: 96px;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+#stats {
+  background-color: var(--red);
+  color: var(--white);
+  padding: 5rem;
+}
+
+#country {
+  background-color: var(--tan);
+  color: var(--white);
+  padding: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  flex-direction: column;
+}
+
+#style {
+  padding: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  flex-direction: column;
+}
+
+#brands {
+  padding: 5rem;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 400px) {
+  #description {
+    margin: 1rem;
+  }
+
+  .section-title {
+    font-size: 30px!important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #description {
+    flex-direction: column;
+  }
+
+  .section-title {
+    font-size: 40px!important;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  #description {
+    margin: 2rem;
+  }
+}

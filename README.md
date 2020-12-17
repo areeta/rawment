@@ -90,3 +90,5 @@ N/A.
 5. Is there anything special we need to know in order to run your code?
 
 No, but for your convenience, the site is hosted at https://nguyenvivian.github.io/inf133-final-project/ so you can easily view and share this project.
+
+Our repository is located at https://github.com/nguyenvivian/inf133-final-project.

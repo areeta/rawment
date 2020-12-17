@@ -79,8 +79,9 @@ For the data page, we wanted to show majority of the graph data and make it easy
 * HTML Rectangles: https://stackoverflow.com/questions/20690408/how-to-draw-a-rectangle-in-html-or-css
 * Image on image: https://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html
 * Positioning: https://www.w3schools.com/css/css_positioning.asp
-* Bootstrap Cards: https://getbootstrap.com/docs/4.0/components/card/
-* Bootstrap Grid: https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
+* BootStrap Cards: https://getbootstrap.com/docs/4.0/components/card/
+* BootStrap Grid: https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
+* BootStrap Nav Bar: https://getbootstrap.com/docs/4.0/components/navbar/
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
 

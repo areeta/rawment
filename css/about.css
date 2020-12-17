@@ -140,16 +140,20 @@
   }
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1000px) {
   #description {
-    margin: 2rem;
+    margin: 5rem;
+  }
+
+  #eating-ramen {
+    height: 300px;
   }
 
   #inspiration, #accessbility, #technology, #team, #technology {
     padding: 2rem!important;
   }
 
-  #eating-ramen, #instant-ramen, #fancy-ramen {
+   #instant-ramen, #fancy-ramen {
     height: 400px;
   }
 

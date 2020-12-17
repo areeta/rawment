@@ -77,7 +77,7 @@ p, dl, ol, ul {
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 850px) {
   #description {
     flex-direction: column;
   }
@@ -87,8 +87,12 @@ p, dl, ol, ul {
   }
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1000px) {
   #description {
-    margin: 2rem;
+    margin: 5rem;
+  }
+
+  #world-view {
+    height: 300px;
   }
 }

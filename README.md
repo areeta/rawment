@@ -50,3 +50,6 @@ For the data page, we wanted to show majority of the graph data and make it easy
 @areetaw
 * [X] Design and create mockups for the website using Figma.
 * [X] Responsible for the HTML/CSS/Bootstrap portion of the project.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

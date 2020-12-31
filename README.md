@@ -2,6 +2,8 @@
 
 >A responsive web application that analyzes and displays instant ramen statistics to help college students find the best ramen for them. 
 
+![](http://g.recordit.co/BovsGqMqQo.gif)
+
 ## Overview
 As the stereotype says, many college students around the world live up to the concept of a “broke college student”. During our search for ideas, we thought we could use the data set of instant ramen noodles, a primary food source that many broke college students eat day to day. Our final project is a website to analyze and display instant ramen statistics to help college students find the best ramen for them. 
 
